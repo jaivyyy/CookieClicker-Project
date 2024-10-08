@@ -9,6 +9,12 @@
     margin-left: 20px;
 }
 
+.cookie{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 button{
     border: 2px solid;
     border-radius: 10px;
@@ -22,4 +28,8 @@ body{
 
 p{
     margin-left: 10px;
+}
+
+.shop{
+    padding-top: 100px;
 }
