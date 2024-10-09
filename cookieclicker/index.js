@@ -47,5 +47,12 @@ function activateAutoClicker(){
     }, 1000); // per 1000 milliseconden 1 punt
 }
 
+cookie.addEventListener("click", function() {
+    // class scaled voor de animatie per klik
+    cookie.classList.add("scaled");
 
-
+    // Verwijder de class scaled na een korte vertraging zodat de animatie opnieuw kan beginnen
+    setTimeout(function() {
+        cookie.classList.remove("scaled");
+    }, 100); 
+});
