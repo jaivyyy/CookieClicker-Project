@@ -24,21 +24,37 @@ var cook_sz = 300;
     pointsdisplay.textContent = points;
     }   )
 
-    function buyAutoClicker() {
+    function showNotification(message) {
+        // notificatie div opzoeken
+        const notification = document.getElementById('notification')
+
+        // update tekst van de notificatie
+        notification.textContent = message;
+
+        // maak de notificatie onzichtbaar
+        notification.style.display = 'block';
+        
+        // zet een timer wanneer de notificatie moet verdwijnen
+        setTimeout(function() {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+
+
+     // Functie om auto-clicker te kopen
+     function buyAutoClicker() {
         if (points >= autoClickerCost && !autoClickerActive) {
-            // Genoeg punten en auto-clicker is nog niet gekocht
-            points -= autoClickerCost;  // Trek de kosten af
-            pointsdisplay.textContent = points; // Update de puntenweergave
-            autoClickerActive = true;   // Zet de auto-clicker op actief
+            points -= autoClickerCost;  // Trek punten af
+            autoClickerActive = true;   // Zet auto-clicker op actief
             activateAutoClicker();      // Activeer de auto-clicker
+            showNotification("You have bought the level 1 autoclicker"); // Toon notificatie
         } else if (points < autoClickerCost) {
-            // Niet genoeg punten
-            alert("Not enough cookies to buy the auto clicker.");
+            showNotification("Not enough points to buy the autoclicker");
         } else if (autoClickerActive) {
-            // Auto-clicker is al gekocht
-            alert("You already have the auto clicker active!");
+            showNotification("You already have the autoclicker");
         }
     }
+    
     
 function activateAutoClicker(){
     setInterval(function()  {
@@ -56,3 +72,6 @@ cookie.addEventListener("click", function() {
         cookie.classList.remove("scaled");
     }, 100); 
 });
+
+
+
