@@ -39,6 +39,7 @@ p{
 
 img {
     transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    cursor: pointer;
 }
 
 img.scaled {
@@ -46,3 +47,43 @@ img.scaled {
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+.winkel{
+    color: white;
+    margin-left: 10px;
+    padding-bottom: 3px;
+}
+
+button {
+    background-color: grey;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: monospace;
+    color: white;
+    padding: 20px;
+    margin-left: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(201, 201, 201);
+}
+
+.punten{
+    color: white;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+#notification {
+    background-color: #4CAF50; /* Groen voor succesvolle aankoop */
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 20px;
+    border-radius: 5px;
+    display: none; /* Start verborgen */
+    align-items: center;
+    justify-content: center;
+}
