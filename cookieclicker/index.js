@@ -16,6 +16,12 @@
 
     // autoclicker nog niet gekocht dus false
     let autoClickerActive = false;
+
+    // Houd het level van de auto-clicker bij
+    let autoClickerLevel = 0;
+
+    
+
     
     // level gaat omhoog
     let clickerLevelIncrease = document.querySelector(".clicker-level")
@@ -49,21 +55,23 @@
 
      // Functie om auto-clicker te kopen
      function buyAutoClicker() {
-        if (points >= autoClickerCost && !autoClickerActive) {
+        if (points >= autoClickerCost) {
             points -= autoClickerCost;  // Trek punten af
-            activateAutoClicker();      // Activeer de auto-clicker
-            showNotification("You have bought the level 1 autoclicker"); // Toon notificatie
-            clickerLevelIncrease.innerHTML ++ // laat zien welke level je bent
-        } else if (points < autoClickerCost) {
+            autoClickerLevel++; // Verhoog het level van de auto-clicker
+            activateAutoClicker(); // Activeer de auto-clicker 
+            showNotification(`You have bought the level ${autoClickerLevel} autoclicker`); // Level notificatie
+            clickerLevelIncrease.textContent = autoClickerLevel; // Laat zien welk level je bent
+        } else {
             showNotification("Not enough points to buy the autoclicker");
-        } else if (autoClickerActive) {
-            showNotification("You already have the autoclicker");
         }
     }
     
     
 function activateAutoClicker(){
     setInterval(function()  {
+        
+        points += omas.update()
+
         points += 1; // voeg 1 punt
         pointsdisplay.textContent = points; //update punten
     }, 1000); // per 1000 milliseconden 1 punt
@@ -73,13 +81,18 @@ function activateAutoClicker(){
 function upgradeCookie() {
     if (points >= upgradeCost) {
         points -= upgradeCost;  // Trek de upgrade kosten af
-        cookiesPerClick = 4;    // Verhoog het aantal cookies per klik naar 4
+        cookiesPerClick = 1;    // Verhoog het aantal cookies per klik naar 2
         pointsdisplay.textContent = points;  // Werk de punten teller bij
-        showNotification("Upgraded! Now you earn 4 cookies per click.");
+        showNotification("Upgraded! Now you earn 2 cookies per click.");
     } else {
         showNotification("Not enough points to upgrade.");
     }
 }
+
+cookie.addEventListener("click", function() {
+    points += cookiesPerClick; // Gebruikt nu de geupgrade cookies per click
+    pointsdisplay.textContent = points;
+});
 
 cookie.addEventListener("click", function() {
     // class scaled voor de animatie per klik
@@ -90,4 +103,3 @@ cookie.addEventListener("click", function() {
         cookie.classList.remove("scaled");
     }, 100); 
 });
-
