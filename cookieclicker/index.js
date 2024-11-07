@@ -1,4 +1,5 @@
 class CookieClicker {
+
     // Geeft waardes aan aantal punten, prijzen of max-levels voor upgrades
     constructor() {
         this.points = 0;
@@ -7,7 +8,19 @@ class CookieClicker {
         this.autoClickerLevel = 0;
         this.cookiesPerClick = 1;
         this.maxAutoClickerLevel = 2; // Max-level autoclicker
-        this.maxCookiesPerClickLevel = 1;
+        this.maxCookiesPerClickLevel = 2;
+        this.grandmaCost = 100; // Prijs voor 1 oma
+        this.grandmaLevel = 0; // begin level van de grandma
+        this.farmCost = 250;
+        this.farmLevel = 0
+        this.mineCost = 300;
+        this.mineLevel = 0;
+        this.factoryCost = 1000;
+        this.factoryLevel = 0;
+        this.bankCost = 5000;
+        this.bankLevel = 0;
+        this.landCost = 10000;
+        this.landLevel = 0;
 
         //punten teller
         this.pointsDisplay = document.getElementById("points");
@@ -18,7 +31,14 @@ class CookieClicker {
         this.cookieElement.addEventListener("click", () => this.handleCookieClick());
         document.getElementById("buyAutoClicker").addEventListener("click", () => this.buyAutoClicker());
         document.getElementById("upgradeCookie").addEventListener("click", () => this.upgradeCookie());
+        document.getElementById("buyGrandma").addEventListener("click", () => this.buyGrandma());
+        document.getElementById("buyFarm").addEventListener("click", () => this.buyFarm());
+        document.getElementById("buyMine").addEventListener("click", () => this.buyMine());
+        document.getElementById("buyFactory").addEventListener("click", () => this.buyFactory());
+        document.getElementById("buyBank").addEventListener("click", () => this.buyBank());
+        document.getElementById("buyLand").addEventListener("click", () => this.buyLand());
     }
+    
 
     handleCookieClick() {
         // Meer punten per klik
@@ -126,6 +146,137 @@ class CookieClicker {
         this.showNotification("Not enough points to upgrade.");
     }
 }
+
+    buyGrandma() {
+    if (this.points >= this.grandmaCost) {
+        this.points -= this.grandmaCost;
+        this.grandmaLevel++;
+        this.startGrandma();
+        this.showNotification(`You bought grandma level ${this.grandmaLevel}`);
+        this.updatePointsDisplay();
+    } else {
+        this.showNotification("Not enough points to upgrade.");
+    }
+}
+
+    startGrandma() {
+    if (this.grandmaLevel === 1) {
+        setInterval(() => {
+            this.points += 25;
+            this.updatePointsDisplay();
+            }, 1000);
+        }
+    }
+    buyFarm(){
+        if (this.points >= this.farmCost) {
+            this.points -= this.farmLevel;
+            this.farmLevel++;
+            this.startFarm();
+            this.showNotification(`You bought a farm!`);
+            this.updatePointsDisplay();
+        } else {
+            this.showNotification("Not enough points to upgrade.");
+        }
+    }
+    
+    startFarm() {
+        if (this.farmLevel === 1) {
+            setInterval(() => {
+                this.points += 66;
+                this.updatePointsDisplay();
+            }, 1000);
+        }
+    }
+    
+    buyMine() {
+        if (this.points >= this.mineCost) {
+            this.points -= this.mineCost;
+            this.mineLevel++;
+            this.startMine();
+            this.showNotification(`You bought a mine!`);
+            this.updatePointsDisplay();
+        } else {
+            this.showNotification("Not enough points to upgrade.");
+        }
+    }
+    
+    startMine() {
+        if (this.mineLevel === 1) {
+            setInterval(() => {
+                this.points += 88;
+                this.updatePointsDisplay();
+            }, 1000);
+        }
+    }
+    
+    buyFactory() {
+        if (this.points >= this.factoryCost) {
+            this.points -= this.factoryCost;
+            this.factoryLevel++;
+            this.startFactory();
+            this.showNotification(`You bought a factory!`);
+            this.updatePointsDisplay();
+        } else {
+            this.showNotification("Not enough points to upgrade.");
+        }
+    }
+    
+    startFactory() {
+        if (this.factoryLevel === 1) {
+            setInterval(() => {
+                this.points += 134;
+                this.updatePointsDisplay();
+            }, 1000);
+        }
+    }
+    
+    buyBank() {
+        if (this.points >= this.bankCost) {
+            this.points -= this.bankCost;
+            this.bankLevel++;
+            this.startBank();
+            this.showNotification(`You bought a bank!`);
+            this.updatePointsDisplay();
+        } else {
+            this.showNotification("Not enough points to upgrade.");
+        }
+    }
+    
+    startBank() {
+        if (this.bankLevel === 1) {
+            setInterval(() => {
+                this.points += 265;
+                this.updatePointsDisplay();
+            }, 1000);
+        }
+    }
+    
+    
+    buyLand() {
+        if (this.points >= this.landCost) {
+            this.points -= this.landCost;
+            this.landLevel++;
+            this.startLand();
+            this.showNotification(`You bought a land!`);
+            this.updatePointsDisplay();
+        } else {
+            this.showNotification("Not enough points to upgrade.");
+        }
+    }
+    
+    startLand() {
+        if (this.landLevel === 1) {
+            setInterval(() => {
+                this.points += 407;
+                this.updatePointsDisplay();
+            }, 1000);
+        }
+    }
+}
+
+// initialiseert het spel
+const game = new CookieClicker();
+
 }
 
 // initialiseert het spel
