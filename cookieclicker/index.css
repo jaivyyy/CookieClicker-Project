@@ -24,7 +24,7 @@
 
 
 body{
-    background-color: cornflowerblue;
+    background-color: #244c66;
      display: flex;
     justify-content: center;
     align-items: center;
@@ -63,20 +63,21 @@ img.scaled {
 
 
 button {
-    background-color: grey;
+    background-color: #3f2e27;
     border-radius: 5px;
     font-weight: bold;
     font-size: 15px;
     font-family: monospace;
     color: white;
     padding: 20px;
-    margin-left: 10px;
+    margin-left: 25px;
+    margin-bottom: 10px;
     text-align: center;
     cursor: pointer;
 }
 
 button:hover{
-    background-color: rgb(201, 201, 201);
+    background-color: #60463c;
 }
 
 .punten{
