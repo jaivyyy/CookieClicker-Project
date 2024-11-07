@@ -1,102 +1,77 @@
-let cook = document.getElementById("cookie");
-var cook_sz = 300;
+class CookieClicker {
+    constructor() {
+        this.points = 0;
+        this.autoClickerCost = 50;
+        this.upgradeCost = 25;
+        this.autoClickerLevel = 0;
+        this.cookiesPerClick = 1;
 
-cook.style.width = `${cook_sz}px`;
-cook.style.height = `${cook_sz}px`;
+        this.pointsDisplay = document.getElementById("points");
+        this.notification = document.getElementById("notification");
+        this.clickerLevelDisplay = document.querySelector(".clicker-level");
 
+        this.cookieElement = document.getElementById("cookie");
+        this.cookieElement.addEventListener("click", () => this.handleCookieClick());
+        document.getElementById("buyAutoClicker").addEventListener("click", () => this.buyAutoClicker());
+        document.getElementById("upgradeCookie").addEventListener("click", () => this.upgradeCookie());
+    }
 
-// je begint met 0 punten
-let points = 0;
+    handleCookieClick() {
+        // Add points per click
+        this.points += this.cookiesPerClick;
+        this.updatePointsDisplay();
 
-// prijs van de autoclicker
-let autoClickerCost = 50;
+        // Add scaling effect
+        this.cookieElement.classList.add("scaled");
+        setTimeout(() => {
+            this.cookieElement.classList.remove("scaled");
+        }, 100); // 100ms delay for the effect
+    }
 
-// prijs level 1 klikpunten upgrade
-let upgradeCost = 25;
+    updatePointsDisplay() {
+        this.pointsDisplay.textContent = this.points;
+    }
 
-// autoclicker nog niet gekocht dus false
-let autoClickerActive = false;
+    showNotification(message) {
+        this.notification.textContent = message;
+        this.notification.style.display = 'block';
+        setTimeout(() => {
+            this.notification.style.display = 'none';
+        }, 3000);
+    }
 
-// Houd het level van de auto-clicker bij
-let autoClickerLevel = 0;
+    buyAutoClicker() {
+        if (this.points >= this.autoClickerCost) {
+            this.points -= this.autoClickerCost;
+            this.autoClickerLevel++;
+            this.startAutoClicker();
+            this.showNotification(`You bought auto-clicker level ${this.autoClickerLevel}`);
+            this.clickerLevelDisplay.textContent = this.autoClickerLevel;
+            this.updatePointsDisplay();
+        } else {
+            this.showNotification("Not enough points to buy auto-clicker");
+        }
+    }
 
+    startAutoClicker() {
+        if (this.autoClickerLevel === 1) {
+            setInterval(() => {
+                this.points += 1;
+                this.updatePointsDisplay();
+            }, 1000);
+        }
+    }
 
-
-
-// level gaat omhoog
-let clickerLevelIncrease = document.querySelector(".clicker-level")
-
-// creer koek en punten elementen
-const cookie = document.getElementById("cookie");
-const pointsdisplay = document.getElementById("points");
-
-// klik evenement per klik 2 punten
-cookie.addEventListener("click", function() {
-points += 1;
-pointsdisplay.textContent = points;
-}   )
-
-function showNotification(message) {
-    // notificatie div opzoeken
-    const notification = document.getElementById('notification')
-
-    // update tekst van de notificatie
-    notification.textContent = message;
-
-    // maak de notificatie onzichtbaar
-    notification.style.display = 'block';
-    
-    // zet een timer wanneer de notificatie moet verdwijnen
-    setTimeout(function() {
-        notification.style.display = 'none';
-    }, 3000);
-}
-
-
- // Functie om auto-clicker te kopen
- function buyAutoClicker() {
-    if (points >= autoClickerCost) {
-        points -= autoClickerCost;  // Trek punten af
-        autoClickerLevel++; // Verhoog het level van de auto-clicker
-        activateAutoClicker(); // Activeer de auto-clicker 
-        showNotification(`You have bought the level ${autoClickerLevel} autoclicker`); // Level notificatie
-        clickerLevelIncrease.textContent = autoClickerLevel; // Laat zien welk level je bent
-    } else {
-        showNotification("Not enough points to buy the autoclicker");
+    upgradeCookie() {
+        if (this.points >= this.upgradeCost) {
+            this.points -= this.upgradeCost;
+            this.cookiesPerClick = 2;
+            this.showNotification("Upgraded! Now you earn 2 cookies per click.");
+            this.updatePointsDisplay();
+        } else {
+            this.showNotification("Not enough points to upgrade.");
+        }
     }
 }
 
-
-function activateAutoClicker(){
-setInterval(function()  {
-    points += 1; // voeg 1 punt
-    pointsdisplay.textContent = points; //update punten
-}, 1000); // per 1000 milliseconden 1 punt
-}
-
-
-function upgradeCookie() {
-if (points >= upgradeCost) {
-    points -= upgradeCost;  // Trek de upgrade kosten af
-    cookiesPerClick = 1;    // Verhoog het aantal cookies per klik naar 2
-    pointsdisplay.textContent = points;  // Werk de punten teller bij
-    showNotification("Upgraded! Now you earn 2 cookies per click.");
-} else {
-    showNotification("Not enough points to upgrade.");
-}
-}
-
-cookie.addEventListener("click", function() {
-points += cookiesPerClick; // Gebruikt nu de geupgrade cookies per click
-pointsdisplay.textContent = points;
-});
-
-cookie.addEventListener("click", function() {
-// class scaled voor de animatie per klik
-cookie.classList.add("scaled");
-
-// Verwijder de class scaled na een vertraging zodat de animatie opnieuw kan beginnen
-setTimeout(function() {
-    cookie.classList.remove("scaled");
-}, 100); 
-});
+const game = new CookieClicker();
