@@ -2,10 +2,13 @@
     padding: 0;
     margin: 0;
 }
+
+@import url('https://fonts.cdnfonts.com/css/arcade-classic');
+
 #cookie{
 
-        width: 250px; /* Adjust as needed */
-        height: 250px;
+        width: 350px; /* grote van het koekje */
+        height: 350px;
         transition: 0.1s;
         border-radius: 100%;
         padding-top: 20px;
@@ -96,9 +99,9 @@ button:hover{
 
 .cookie-effect {
     position: absolute;
-    color: #ff8c00; /* Helder oranje kleur */
-    font-size: 18px;
-    font-weight: bold;
+    color: white; /* Witte tekst kleur */
+    font-size: 26px;
+    font-family: 'ArcadeClassic', sans-serif;
     animation: floatUp 1s ease-out forwards;
     pointer-events: none; /* Zorgt ervoor dat het geen klik-events ontvangt */
 }
