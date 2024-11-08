@@ -9,7 +9,10 @@ class CookieClicker {
         this.cookiesPerClick = 1;
         this.maxAutoClickerLevel = 2; // Max-level autoclicker
         this.maxCookiesPerClickLevel = 2;
+        this.maxGrandmaLevel = 1;
         this.grandmaCost = 100; // Prijs voor 1 oma
+        this.grandmaLevelDisplay = document.querySelector(".grandma-level");
+        this.buyGrandmaButton = document.getElementById("buyGrandma");
         this.grandmaLevel = 0; // begin level van de grandma
         this.farmCost = 250;
         this.farmLevel = 0
@@ -109,14 +112,14 @@ class CookieClicker {
     }
 
     updateClickerLevelDisplay() {
-        // Laat de huidige level zien of max-level
+        const autoClickerButton = document.getElementById("buyAutoClicker");
         if (this.autoClickerLevel === this.maxAutoClickerLevel) {
-            this.clickerLevelDisplay.textContent = "Max Level Reached";
+            autoClickerButton.textContent = "Auto-Clicker (Max Level)";
         } else {
-            this.clickerLevelDisplay.textContent = `Auto-clicker Level: ${this.autoClickerLevel}`;
+            autoClickerButton.textContent = `Buy Auto-Clicker (Cost: ${this.autoClickerCost} points)`;
         }
     }
-
+    
     startAutoClicker() {
         // autoclicker aantal punten per ms
         if (this.autoClickerLevel === 1) {
@@ -147,17 +150,30 @@ class CookieClicker {
     }
 }
 
-    buyGrandma() {
-    if (this.points >= this.grandmaCost) {
-        this.points -= this.grandmaCost;
-        this.grandmaLevel++;
-        this.startGrandma();
-        this.showNotification(`You bought grandma level ${this.grandmaLevel}`);
-        this.updatePointsDisplay();
+updateUpgradeDisplay() {
+    const upgradeButton = document.getElementById("upgradeCookie");
+    if (this.cookiesPerClick === this.maxCookiesPerClickLevel) {
+        upgradeButton.textContent = "Upgrade cookies per click (Max Level)";
     } else {
-        this.showNotification("Not enough points to upgrade.");
+        upgradeButton.textContent = `Upgrade cookies per click (Cost: ${this.upgradeCost} points)`;
     }
 }
+
+    buyGrandma() {
+        if (this.points >= this.grandmaCost && this.grandmaLevel < this.maxGrandmaLevel) {
+            this.points -= this.grandmaCost;
+            this.grandmaLevel++;
+            this.startGrandma();
+            this.showNotification(`You bought grandma level ${this.grandmaLevel}`);
+            this.updatePointsDisplay();
+            this.updateGrandmaLevelDisplay();  // Update de level
+        } else if (this.grandmaLevel === this.maxGrandmaLevel) {
+            this.showNotification("Max level reached for grandma.");
+        } else {
+            this.showNotification("Not enough points to buy grandma.");
+        }
+    }
+
 
     startGrandma() {
     if (this.grandmaLevel === 1) {
@@ -167,6 +183,18 @@ class CookieClicker {
             }, 1000);
         }
     }
+
+    updateGrandmaLevelDisplay() {
+        if (this.grandmaLevel === this.maxGrandmaLevel) {
+            this.grandmaLevelDisplay.textContent = "Max Level Reached";
+            this.buyGrandmaButton.textContent = "Grandma (Max Level)";
+        } else {
+            this.grandmaLevelDisplay.textContent = `Level: ${this.grandmaLevel}`;
+            this.buyGrandmaButton.textContent = `Buy Grandma (Cost: ${this.grandmaCost} points)`;
+        }
+    }
+
+
     buyFarm(){
         if (this.points >= this.farmCost) {
             this.points -= this.farmLevel;
@@ -272,11 +300,6 @@ class CookieClicker {
             }, 1000);
         }
     }
-}
-
-// initialiseert het spel
-const game = new CookieClicker();
-
 }
 
 // initialiseert het spel
