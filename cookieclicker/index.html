@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- cookie foto in een div voor de styling -->
+   <!-- Cookie foto -->
+<img id="cookie" src="images/cookie.png" alt="cookie">
+
+
+    <!-- punten teller -->
+    <p class="punten">Points: <span id="points">0</span></p>
+
+    <!-- shop -->
+    <div id="shop">
+        <h2 class="winkel">Shop</h2>
+        <button id="buyAutoClicker" onclick="buyAutoClicker()">Buy Auto Clicker (Cost: 50 points)<br>Level 
+        <!-- Update de level van de upgrade -->
+            <span class="clicker-level">0</span></button>
+    <button id="upgradeCookie" onclick="upgradeCookie()">Upgrade cookies per click (Cost: 25 points)</button>
+    <button id="buyGrandma" onclick="buyGrandma()"> Buy Grandma 👵🏼 (Cost: 100 points) level 
+            <span class="grandma-level">0</span></button>
+    <button id="buyFarm" onclick="buyFarm()">Buy Farm 🌱 (Cost: 250 points)</button>
+    <button id="buyMine" onclick="buyMine()">Buy Mine ⛏️ (Cost: 300 points)</button>
+    <button id="buyFactory" onclick="buyFactory()">Buy Factory 🏭 (Cost: 1000 points)</button>
+    <button id="buyBank" onclick="">Buy Bank 🏦 (Cost: 5000 points)</button>
+    <button id="buyLand" onclick="buyLand()">Buy Land 🏝️ (Cost: 10000 points)</button>  
+    </div>
+
+
+
+    <div id="notification" style="display: none;"> you have bought level 1 autoclicker </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
